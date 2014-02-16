@@ -1,5 +1,6 @@
 package com.dropbox.api.samples;
 
+
 import java.util.Comparator;
 
 public class IndexComparator implements Comparator<SentenceObject>{

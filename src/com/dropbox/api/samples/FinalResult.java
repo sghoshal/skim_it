@@ -11,6 +11,7 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -50,7 +51,7 @@ public class FinalResult extends Activity {
 		summary = getIntent().getExtras().getString("summary").toString();
 
 		TextView summaryView = (TextView) findViewById(R.id.summaryText);
-
+		summaryView.setMovementMethod(new ScrollingMovementMethod());
 		summaryView.setText(summary);
 
 		AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);

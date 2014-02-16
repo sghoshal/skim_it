@@ -1,5 +1,6 @@
 package com.dropbox.api.samples;
 
+
 public class SentenceObject implements Comparable<SentenceObject> {
 	String content;
 	int indexNumber;

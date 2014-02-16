@@ -16,7 +16,7 @@ import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 public class DocParser extends AsyncTask<Void, Long, Boolean>{
 
 	private List<String> pdfUrls;
-	private List<String> stringifiedFiles = new ArrayList<String>();
+	private ArrayList<String> stringifiedFiles = new ArrayList<String>();
 	private Context context;
 	
 	public DocParser(List<String> pdfUrls, Context context) {
@@ -64,12 +64,12 @@ public class DocParser extends AsyncTask<Void, Long, Boolean>{
 		System.out.println("\n\n");
 		
 		String summary = new String();
-		try {
-			summary = SkipItMainClass.APICall(stringifiedFiles, 30);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int[] arrayIntegers = new int[stringifiedFiles.size()];
+		for(int index = 0; i < stringifiedFiles.size(); index++) {
+			arrayIntegers[index] = 1;
 		}
+		
+		summary = SkipItMainClass.APIHelper(stringifiedFiles, 30);
 		System.out.println("\n\n\n\n\n Summary: ");
 		System.out.println(summary);
 		
@@ -97,7 +97,7 @@ public class DocParser extends AsyncTask<Void, Long, Boolean>{
 	}
 
 
-	public void setStringifiedFiles(List<String> stringifiedFiles) {
+	public void setStringifiedFiles(ArrayList<String> stringifiedFiles) {
 		this.stringifiedFiles = stringifiedFiles;
 	}
 

@@ -50,7 +50,8 @@ public class UploadPicture extends AsyncTask<Void, Long, Boolean>{
 		} catch (DropboxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
+		
 		return false;
 	}
 

@@ -1,4 +1,5 @@
 package com.dropbox.api.samples;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,16 +8,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class SkipItMainClass {
-	public static String APICall(List<String> inputFromDhyanam, int numberOfLinesFromDhyanam) throws InterruptedException
+	public static String APIHelper (ArrayList<String> inputFromDhyanam, int numberOfLinesFromDhyanam )
 	{
-/*		
+		/*
 		 * Prepare input from the previous part
-		 
-		ArrayList<String> inputFromDhyanam = new ArrayList<String>();		
+		 */
 
 		StringBuffer information = new StringBuffer();
 		String line = null;
@@ -28,13 +27,13 @@ public class SkipItMainClass {
 			}
 			inputFromDhyanam.add(new String(information));
 			
-			br = new BufferedReader(new FileReader("resources/war.txt"));
+/*			br = new BufferedReader(new FileReader("resources/war.txt"));
 			while((line = br.readLine())!=null)
 			{
 				information.append(line+"\n");				
 			}
 			inputFromDhyanam.add(new String(information));
-
+*/
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,8 +45,7 @@ public class SkipItMainClass {
 		System.out.println("Input file has been put into an arraylist of strings");
 		
 		
-		int numberOfLinesFromDhyanam = 20;
-*/		
+		
 		/*
 		 * Prepare the IDF hashMap
 		 */
@@ -148,9 +146,9 @@ public class SkipItMainClass {
 		{
 			importantSentences.add(allInformation.get(i));
 		}
-//		System.out.println(importantSentences);
-//		System.out.println("Reduced number of sentences");
-//		System.out.println(importantSentences.size());
+		System.out.println(importantSentences);
+		System.out.println("Reduced number of sentences");
+		System.out.println(importantSentences.size());
 		try
 		{
 			Thread.sleep(1000);
@@ -161,21 +159,22 @@ public class SkipItMainClass {
 		}
 		
 		Collections.sort(importantSentences, new IndexComparator());
-		// System.out.println(importantSentences);
-
-		StringBuilder finalResult = new StringBuilder();
+		System.out.println(importantSentences);
+		
+		StringBuffer str = new StringBuffer();
 
 		for(SentenceObject sentence : importantSentences)
 		{
+			str.append("\u2022 " + sentence.content + "\n\n");
 			//System.out.println(sentence.content);
-			finalResult.append(sentence.content + "\n");
 		}
-		return finalResult.toString();
+		return str.toString();
+	
 	}
 	
 	private static HashMap<String, Float> getTfIdf(
 			HashMap<String, Float> idfCounts,
-			List<String> fileInformations) {
+			ArrayList<String> fileInformations) {
 		
 		int idfFiles = 0;
 		BufferedReader br;

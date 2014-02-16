@@ -1,4 +1,5 @@
 package com.dropbox.api.samples;
+
 /*
 
    Porter stemmer in Java. The original paper is in

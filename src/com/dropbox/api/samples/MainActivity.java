@@ -1,6 +1,14 @@
 package com.dropbox.api.samples;
 
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -123,8 +131,55 @@ public class MainActivity extends Activity {
 		});
 	}
 
-	public void onFolderSummaryClick(View view) {
+	public void onFolderSummaryClick(View view)  {
+		File idfFile = new File(getApplicationContext().getFilesDir() + "/resources", "idf.txt");
+		BufferedWriter bw = null;
+		try {
+			bw = new BufferedWriter(new FileWriter(idfFile));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
+		
+		
+		URL oracle = null;
+		try {
+			oracle = new URL("https://www.dropbox.com/s/h8qhop1dupmkarq/idf.txt");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+        BufferedReader in = null;
+		try {
+			in = new BufferedReader(
+			new InputStreamReader(oracle.openStream()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        String inputLine;
+        try {
+			while ((inputLine = in.readLine()) != null) {
+			    System.out.println(inputLine);
+			    bw.write(inputLine);
+			}
+				
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        finally {
+        	 try {
+				in.close();
+				bw.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
 	}
 	
 	public void setLongClickListener(final ListView listViewFolders) {
