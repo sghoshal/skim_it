@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/chooser_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="21dp"
+            android:text="Add files" />
+
+        <Button
+            android:id="@+id/returnToFolders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:onClick="onReturnToFoldersClick"
+            android:text="Main Menu" />
+        
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        android:paddingBottom="6dp"
+        android:paddingTop="2dp" />
+
+    <ListView
+        android:id="@+id/lvLinks"
+        android:layout_width="match_parent"
+        android:layout_height="600dp" >
+    </ListView>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        android:paddingBottom="6dp"
+        android:paddingTop="2dp" />
+
+    <Button
+        android:id="@+id/generate_summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onGenerateClick"
+        android:text="Generate Summary" />
+
+</LinearLayout>
