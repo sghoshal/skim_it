@@ -217,13 +217,15 @@ public final class R {
         public static final int common_btn_light_gray_pressed=0x7f020008;
         public static final int common_button_green=0x7f020009;
         public static final int common_button_light_gray=0x7f02000a;
-        public static final int ic_launcher=0x7f02000b;
-        public static final int icon_new=0x7f02000c;
-        public static final int tab_dropbox=0x7f02000d;
-        public static final int tab_dropbox_inactive=0x7f02000e;
+        public static final int ic_action_volume_muted=0x7f02000b;
+        public static final int ic_action_volume_on=0x7f02000c;
+        public static final int ic_launcher=0x7f02000d;
+        public static final int icon_new=0x7f02000e;
+        public static final int tab_dropbox=0x7f02000f;
+        public static final int tab_dropbox_inactive=0x7f020010;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b001b;
+        public static final int action_settings=0x7f0b001d;
         public static final int btnCreateGroup=0x7f0b0012;
         public static final int button1=0x7f0b0000;
         public static final int chooser_button=0x7f0b0013;
@@ -249,6 +251,8 @@ public final class R {
         public static final int lvFolders=0x7f0b0001;
         public static final int lvLinks=0x7f0b0015;
         public static final int returnToFolders=0x7f0b0014;
+        public static final int speaker_off=0x7f0b001c;
+        public static final int speaker_on=0x7f0b001b;
         public static final int summaryHeading=0x7f0b0019;
         public static final int summaryText=0x7f0b001a;
     }
@@ -265,7 +269,8 @@ public final class R {
         public static final int summary=0x7f030006;
     }
     public static final class menu {
-        public static final int main=0x7f0a0000;
+        public static final int help_menu=0x7f0a0000;
+        public static final int main=0x7f0a0001;
     }
     public static final class string {
         public static final int action_settings=0x7f07000a;

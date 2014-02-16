@@ -8,13 +8,24 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dropbox.api.samples.chooser_start.R;
 import com.dropbox.client2.DropboxAPI;
@@ -27,10 +38,13 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class FinalResult extends Activity {
+public class FinalResult extends Activity implements OnInitListener{
 
 	private UploadRequest mRequest;
 	private String summary;
+
+	private TextToSpeech tts;
+	private boolean muteSpeaker = true;
 
 	final static private String APP_KEY = "2fa7zsubsw6gukm";
 	final static private String APP_SECRET = "jhujg8uaatgkwe4";
@@ -39,7 +53,7 @@ public class FinalResult extends Activity {
 
 	// In the class declaration section:
 	private DropboxAPI<AndroidAuthSession> mDBApi;
-	
+
 
 	/** Called when the activity is first created. */
 	@Override
@@ -50,6 +64,12 @@ public class FinalResult extends Activity {
 		setContentView(R.layout.summary);
 		summary = getIntent().getExtras().getString("summary").toString();
 
+		tts = new TextToSpeech(this, this);
+		// get action bar   
+		ActionBar actionBar = getActionBar();
+		// Enabling Up / Back navigation
+		actionBar.setDisplayHomeAsUpEnabled(true);
+
 		TextView summaryView = (TextView) findViewById(R.id.summaryText);
 		summaryView.setMovementMethod(new ScrollingMovementMethod());
 		summaryView.setText(summary);
@@ -57,6 +77,76 @@ public class FinalResult extends Activity {
 		AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
 		AndroidAuthSession session = new AndroidAuthSession(appKeys, ACCESS_TYPE);
 		mDBApi = new DropboxAPI<AndroidAuthSession>(session);
+	}
+
+	public boolean onSpeakerOnClick(MenuItem menu) {
+		muteSpeaker = false;
+		startSpeaking();
+		return true;
+	}
+	
+	public boolean onSpeakerOffClick(MenuItem menu) {
+		
+		if (tts.isSpeaking()) 
+			tts.stop();
+		muteSpeaker = true;
+		return true;
+	}
+	
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		//inflater.inflate(R.menu.menu, menu);
+		inflater.inflate(R.menu.help_menu, menu);
+		setTitle("StudySpaces");
+		getActionBar().setDisplayShowTitleEnabled(true);
+		return true;
+	}
+
+
+	public void startSpeaking() {
+		if (tts != null) {
+
+			String text = "Summary";
+			text += summary;
+			System.out.println(text);
+
+
+			if (text != null) {
+				if (!tts.isSpeaking())
+					tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+
+			}
+		}	
+	}
+
+
+	@TargetApi(Build.VERSION_CODES.DONUT)
+	@SuppressLint("NewApi")
+	@Override
+	public void onInit(int code) {
+		if (code==TextToSpeech.SUCCESS) {
+			tts.setLanguage(Locale.getDefault());
+		} else {
+			tts = null;
+			Toast.makeText(this, "Failed to initialize TTS engine.", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		if (tts!=null) {
+			tts.stop();
+			tts.shutdown();
+		}
+		super.onDestroy();
+	}
+
+	public void stopVoice()
+	{
+		if (tts.isSpeaking())
+			tts.stop();
 	}
 
 	public void onHomeClick(View view) {
@@ -81,11 +171,11 @@ public class FinalResult extends Activity {
 				BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 				bw.write(summary);
 				bw.close();
-				
+
 				SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy_HH-mm-ss");
 				Date today = Calendar.getInstance().getTime();
 				String repertDate = df.format(today);
-				
+
 				String path = "Summary/summary_" + repertDate + ".pdf";
 				System.out.println(getApplicationContext().getFilesDir());
 
