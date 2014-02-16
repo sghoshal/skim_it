@@ -207,7 +207,7 @@ public class DisplayFiles extends Activity {
 		
 		List<String> toBeConverted = new ArrayList<String>();
 		toBeConverted.add(file.getLink());
-		DocParser docParser = new DocParser(toBeConverted);
+		DocParser docParser = new DocParser(toBeConverted, getApplicationContext());
 		docParser.execute();
 	}
 

@@ -223,10 +223,11 @@ public final class R {
         public static final int tab_dropbox_inactive=0x7f02000e;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b0017;
+        public static final int action_settings=0x7f0b001b;
         public static final int btnCreateGroup=0x7f0b0012;
         public static final int button1=0x7f0b0000;
         public static final int chooser_button=0x7f0b0013;
+        public static final int cloudUpload=0x7f0b0018;
         public static final int createGroupText=0x7f0b0010;
         public static final int dbx_bottom_bar=0x7f0b000d;
         public static final int dbx_bottom_bar_cancel_button=0x7f0b000e;
@@ -244,9 +245,12 @@ public final class R {
         public static final int folderName=0x7f0b0011;
         public static final int folder_summary=0x7f0b0002;
         public static final int generate_summary=0x7f0b0016;
+        public static final int home=0x7f0b0017;
         public static final int lvFolders=0x7f0b0001;
         public static final int lvLinks=0x7f0b0015;
         public static final int returnToFolders=0x7f0b0014;
+        public static final int summaryHeading=0x7f0b0019;
+        public static final int summaryText=0x7f0b001a;
     }
     public static final class integer {
         public static final int dbx_max_action_buttons=0x7f050000;
@@ -258,6 +262,7 @@ public final class R {
         public static final int bottom_buttons_light=0x7f030003;
         public static final int create_folder=0x7f030004;
         public static final int file_list=0x7f030005;
+        public static final int summary=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;

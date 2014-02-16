@@ -28,6 +28,8 @@
         </activity>
         <activity android:name="com.dropbox.api.samples.CreateFolder" >
         </activity>
+        <activity android:name="com.dropbox.api.samples.FinalResult"></activity>
+        
     </application>
 
 </manifest>

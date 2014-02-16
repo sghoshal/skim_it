@@ -1,17 +1,13 @@
 package com.dropbox.api.samples;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import android.graphics.SumPathEffect;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 
 import com.itextpdf.text.pdf.PdfReader;
@@ -21,9 +17,11 @@ public class DocParser extends AsyncTask<Void, Long, Boolean>{
 
 	private List<String> pdfUrls;
 	private List<String> stringifiedFiles = new ArrayList<String>();
+	private Context context;
 	
-	public DocParser(List<String> pdfUrls) {
+	public DocParser(List<String> pdfUrls, Context context) {
 		this.pdfUrls = pdfUrls;
+		this.context = context;
 	}
 
 
@@ -74,6 +72,11 @@ public class DocParser extends AsyncTask<Void, Long, Boolean>{
 		}
 		System.out.println("\n\n\n\n\n Summary: ");
 		System.out.println(summary);
+		
+		Intent summaryIntent = new Intent(context, FinalResult.class);
+		summaryIntent.putExtra("summary", summary);
+		summaryIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity( summaryIntent );
 		
 		return null;
 	}

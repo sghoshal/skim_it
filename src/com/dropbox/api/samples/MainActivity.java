@@ -183,7 +183,7 @@ public class MainActivity extends Activity {
 		System.out.println("Files: " + fileLinksInFolder);
 		
 		
-		DocParser docParser = new DocParser(fileLinksInFolder);
+		DocParser docParser = new DocParser(fileLinksInFolder, getApplicationContext());
 		docParser.execute();
 	}
 
