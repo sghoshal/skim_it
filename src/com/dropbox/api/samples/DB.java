@@ -181,7 +181,7 @@ public class DB extends SQLiteOpenHelper{
 	/**
 	 * Returns true if rows were deleted, false if no rows were deleted
 	 * or if there was an exception
-	 * @param group
+	 * @param  
 	 * @param phNum
 	 * @return
 	 */

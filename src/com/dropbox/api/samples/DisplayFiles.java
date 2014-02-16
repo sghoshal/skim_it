@@ -1,6 +1,8 @@
 package com.dropbox.api.samples;
 
 import java.io.FileDescriptor;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -136,18 +138,6 @@ public class DisplayFiles extends Activity {
 		v.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
-	public void onGenerateClick (View view) {
-		System.out.println("Contents: " + fileInputList);
-		for(String key : mapLinkName.keySet()) {
-			System.out.println("KEY: " + key + " Value: " + mapLinkName.get(key));
-		}
-	} 
-
-	public void generateFileSummary(String folder, FileDetails file) {
-		System.out.println("PRODUCING SUMMARY FOR FILE " + 
-				file.getFileName() + " = LINK: " + file.getLink() + 
-				" IN FOLDER: " + folder);
-	}
 
 	public void setLongClickListener(final ListView listViewGroups) {
 		listViewGroups.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -177,7 +167,15 @@ public class DisplayFiles extends Activity {
 						switch(which) {
 						// Get the Files in folder to generate folder summary
 						case 0:
-							generateFileSummary(folder, fileSelected);
+							try {
+								generateFileSummary(folder, fileSelected);
+							} catch (MalformedURLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							break;
 
 							// Delete the files in folder	
@@ -201,6 +199,26 @@ public class DisplayFiles extends Activity {
 			}
 		});
 	}
+	
+	public void generateFileSummary(String folder, FileDetails file) throws MalformedURLException, IOException {
+		System.out.println("PRODUCING SUMMARY FOR FILE " + 
+				file.getFileName() + " = LINK: " + file.getLink() + 
+				" IN FOLDER: " + folder);
+		
+		List<String> toBeConverted = new ArrayList<String>();
+		toBeConverted.add(file.getLink());
+		DocParser docParser = new DocParser(toBeConverted);
+		docParser.execute();
+	}
+
+
+	public void onGenerateClick (View view) {
+		System.out.println("Contents: " + fileInputList);
+		for(String key : mapLinkName.keySet()) {
+			System.out.println("KEY: " + key + " Value: " + mapLinkName.get(key));
+		}
+	} 
+
 
 
 	/**

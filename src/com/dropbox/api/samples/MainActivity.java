@@ -12,13 +12,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.dropbox.api.samples.chooser_start.R;
 
@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        boolean isEnabled = Settings.System.getInt(this.getApplicationContext().getContentResolver(),Settings.System.AIRPLANE_MODE_ON, 0) == 1;
 		setContentView(R.layout.activity_main);
 
 		listViewFolders = (ListView) findViewById(R.id.lvFolders);
@@ -122,7 +123,10 @@ public class MainActivity extends Activity {
 		});
 	}
 
-
+	public void onFolderSummaryClick(View view) {
+		
+	}
+	
 	public void setLongClickListener(final ListView listViewFolders) {
 		listViewFolders.setOnItemLongClickListener(new OnItemLongClickListener() {
 
@@ -176,7 +180,11 @@ public class MainActivity extends Activity {
 		for (FileDetails f : files) {
 			fileLinksInFolder.add(f.getLink());
 		}
-		System.out.println("Files: " + fileLinksInFolder);		
+		System.out.println("Files: " + fileLinksInFolder);
+		
+		
+		DocParser docParser = new DocParser(fileLinksInFolder);
+		docParser.execute();
 	}
 
 	private class StableArrayAdapter extends ArrayAdapter<String> {
