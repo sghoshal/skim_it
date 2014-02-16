@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import android.graphics.SumPathEffect;
 import android.os.AsyncTask;
 
 import com.itextpdf.text.pdf.PdfReader;
@@ -52,9 +53,28 @@ public class DocParser extends AsyncTask<Void, Long, Boolean>{
 			}
 			
 		}
-		System.out.println("----------RESULT 0:  " + stringifiedFiles.get(0));
-		System.out.println("----------RESULT 111111:  " + stringifiedFiles.get(1));
-
+		
+		int i = 0;
+		for(String str : stringifiedFiles) {
+			
+			System.out.println("----------RESULT: " + i + "--------\n" + str);
+			i++;
+			System.out.println("\n\n");
+		}
+		
+		System.out.println("------ CALLING SUMMARIZER ------- ");
+		System.out.println("\n\n");
+		
+		String summary = new String();
+		try {
+			summary = SkipItMainClass.APICall(stringifiedFiles, 30);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("\n\n\n\n\n Summary: ");
+		System.out.println(summary);
+		
 		return null;
 	}
 
